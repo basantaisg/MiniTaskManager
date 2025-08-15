@@ -16,11 +16,15 @@ export class UsersService {
     name: string,
     email: string,
     password: string,
-    role: UserRole,
+    role?: UserRole,
   ) {
     const hash = await bcrypt.hash(password, 10);
-    const user = this.usersRepo.create({ name, email, password: hash, role });
-
+    const user = this.usersRepo.create({
+      name,
+      email,
+      password: hash,
+      role: role ?? UserRole.USER,
+    });
     return this.usersRepo.save(user);
   }
 
