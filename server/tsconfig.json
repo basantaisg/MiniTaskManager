@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "module": "nodenext",
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "types": ["node", "express"],
     "moduleResolution": "nodenext",
     "resolvePackageJsonExports": true,
     "esModuleInterop": true,
