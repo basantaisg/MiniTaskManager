@@ -31,7 +31,7 @@ export class TasksController {
     @Query('limit') limit: number,
     @Query('status') status?: string,
   ) {
-    const statusEnum =
+    const statusEnum: TaskStatus | undefined =
       status && Object.values(TaskStatus).includes(status as TaskStatus)
         ? (status as TaskStatus)
         : undefined;

@@ -10,13 +10,8 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get()
+  @Get(':id')
   findById(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.findById(id);
-  }
-
-  @Get()
-  findByEmail(@Param('email') email: string) {
-    return this.usersService.findByEmail(email);
   }
 }

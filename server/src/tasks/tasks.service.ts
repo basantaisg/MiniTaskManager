@@ -22,7 +22,7 @@ export class TasksService {
       .take(limit)
       .skip(skip);
 
-    if (status) query.andWhere('task.status= :statu', { status });
+    if (status) query.andWhere('task.status= :status', { status });
 
     return query.getMany();
   }
