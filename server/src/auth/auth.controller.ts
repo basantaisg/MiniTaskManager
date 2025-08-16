@@ -24,7 +24,7 @@ export class AuthController {
     const user = await this.authService.validateUser(email, password);
     const token = this.authService.generateJwt(user);
     res.cookie('jwt', token, { httpOnly: true });
-    res.json({ message: 'Logged in' });
+    return { token: token };
   }
 
   @Post('logout')
