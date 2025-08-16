@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 import { useAuth } from "../context/AuthContext";
-import { Button, Card } from "@shadcn/ui";
+import "./Task.css";
 
 export default function Tasks() {
   const { user } = useAuth();
@@ -15,6 +15,7 @@ export default function Tasks() {
   };
 
   const createTask = async () => {
+    if (!title) return; // simple validation
     await api.post("/tasks", { title, description });
     setTitle("");
     setDescription("");
@@ -31,34 +32,33 @@ export default function Tasks() {
   }, []);
 
   return (
-    <div className="p-8 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6">Welcome, {user?.email}</h1>
-      <div className="flex space-x-2 mb-6">
+    <div className="tasks-container">
+      <h1>Welcome, {user?.email}</h1>
+      <div className="task-inputs">
         <input
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="p-3 rounded-lg border w-1/4"
+          className="title-input"
         />
         <input
           placeholder="Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="p-3 rounded-lg border w-3/4"
+          className="desc-input"
         />
-        <Button onClick={createTask}>Add</Button>
+        <button onClick={createTask}>Add</button>
       </div>
-      <div className="space-y-4">
+
+      <div className="task-list">
         {tasks.map((task) => (
-          <Card key={task.id} className="p-4 flex justify-between items-center">
+          <div key={task.id} className="task-card">
             <div>
-              <h2 className="font-bold">{task.title}</h2>
+              <h2>{task.title}</h2>
               <p>{task.description}</p>
             </div>
-            <Button variant="destructive" onClick={() => deleteTask(task.id)}>
-              Delete
-            </Button>
-          </Card>
+            <button onClick={() => deleteTask(task.id)}>Delete</button>
+          </div>
         ))}
       </div>
     </div>

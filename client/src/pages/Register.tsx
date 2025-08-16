@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
-import { Button } from "@shadcn/ui";
+import "./Register.css";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -22,19 +22,15 @@ export default function Register() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-2xl shadow-lg w-96 space-y-4"
-      >
-        <h1 className="text-2xl font-bold text-center">Register</h1>
+    <div className="register-container">
+      <form onSubmit={handleSubmit} className="register-form">
+        <h1>Register</h1>
 
-        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+        {error && <p className="error">{error}</p>}
 
         <input
           type="text"
           placeholder="Name"
-          className="w-full p-3 border rounded-lg"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
@@ -42,7 +38,6 @@ export default function Register() {
         <input
           type="email"
           placeholder="Email"
-          className="w-full p-3 border rounded-lg"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -50,14 +45,11 @@ export default function Register() {
         <input
           type="password"
           placeholder="Password"
-          className="w-full p-3 border rounded-lg"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <Button type="submit" className="w-full">
-          Register
-        </Button>
+        <button type="submit">Register</button>
       </form>
     </div>
   );
