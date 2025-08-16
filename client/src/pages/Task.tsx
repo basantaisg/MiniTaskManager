@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import "./Task.css";
 
 export default function Tasks() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth(); // <-- add logout
   const [tasks, setTasks] = useState<any[]>([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -15,7 +15,7 @@ export default function Tasks() {
   };
 
   const createTask = async () => {
-    if (!title) return; // simple validation
+    if (!title) return;
     await api.post("/tasks", { title, description });
     setTitle("");
     setDescription("");
@@ -27,13 +27,23 @@ export default function Tasks() {
     fetchTasks();
   };
 
+  const handleLogout = async () => {
+    await logout();
+  };
+
   useEffect(() => {
     fetchTasks();
   }, []);
 
   return (
     <div className="tasks-container">
-      <h1>Welcome, {user?.email}</h1>
+      <div className="tasks-header">
+        <h1>Welcome, {user?.email}</h1>
+        <button onClick={handleLogout} className="logout-btn">
+          Logout
+        </button>
+      </div>
+
       <div className="task-inputs">
         <input
           placeholder="Title"

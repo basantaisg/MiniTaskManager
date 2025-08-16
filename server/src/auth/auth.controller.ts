@@ -23,8 +23,14 @@ export class AuthController {
     const { email, password } = body;
     const user = await this.authService.validateUser(email, password);
     const token = this.authService.generateJwt(user);
-    res.cookie('jwt', token, { httpOnly: true });
-    return { token: token };
+
+    res.cookie('jwt', token, {
+      httpOnly: true,
+      secure: false, // true if using https
+      sameSite: 'lax',
+    });
+
+    return res.json({ token }); // send response explicitly
   }
 
   @Post('logout')
