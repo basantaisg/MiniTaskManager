@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/@types/shadcdn-ui.d.ts","./src/api/axios.ts","./src/context/authcontext.tsx","./src/pages/login.tsx","./src/pages/register.tsx","./src/pages/task.tsx"],"version":"5.9.2"}
